@@ -59,5 +59,6 @@ class AccountTest {
         //then
         assertNotNull(defaultAddress);
         assertThat(defaultAddress, is(notNullValue()));
+        
     }
 }
