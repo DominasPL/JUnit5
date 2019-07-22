@@ -3,6 +3,8 @@ package pl.github.DominasPL.JUnit5;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -14,6 +16,7 @@ class AccountTest {
 
         //then
         assertFalse(account.isActive());
+        assertThat(account.isActive(), equalTo(false));
     }
 
     @Test
@@ -26,6 +29,7 @@ class AccountTest {
 
         //then
         assertTrue(account.isActive());
+        assertThat(account.isActive(), equalTo(true));
     }
 
     @Test
@@ -38,6 +42,7 @@ class AccountTest {
 
         //then
         assertNull(address);
+        assertThat(address, nullValue());
     }
 
     @Test
@@ -53,5 +58,6 @@ class AccountTest {
 
         //then
         assertNotNull(defaultAddress);
+        assertThat(defaultAddress, is(notNullValue()));
     }
 }
