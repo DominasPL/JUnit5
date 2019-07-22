@@ -3,8 +3,7 @@ package pl.github.DominasPL.JUnit5;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
 
@@ -27,5 +26,32 @@ class AccountTest {
 
         //then
         assertTrue(account.isActive());
+    }
+
+    @Test
+    void newlyCreatedAccountShouldNotHaveDefaultDeliveryAddressSet() {
+        //given
+        Account account = new Account();
+
+        //when
+        Address address = account.getDefaultDeliveryAddress();
+
+        //then
+        assertNull(address);
+    }
+
+    @Test
+    void defaultDeliveryAddressShouldNotBeNullAfterBeingSet() {
+
+        //given
+        Account account = new Account();
+        Address address = new Address("Krakowska", "14C");
+        account.setDefaultDeliveryAddress(address);
+
+        //when
+        Address defaultAddress = account.getDefaultDeliveryAddress();
+
+        //then
+        assertNotNull(defaultAddress);
     }
 }
