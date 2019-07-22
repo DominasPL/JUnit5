@@ -32,6 +32,7 @@ class MealTest {
         //then
         assertSame(meal1, meal2);
         assertThat(meal1, sameInstance(meal2));
+
     }
 
     @Test
