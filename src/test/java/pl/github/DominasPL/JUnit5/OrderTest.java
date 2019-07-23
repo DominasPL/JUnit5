@@ -1,6 +1,11 @@
 package pl.github.DominasPL.JUnit5;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -52,5 +57,54 @@ class OrderTest {
         assertThat(order.getMeals().get(0).getPrice(), equalTo(15));
     }
 
-    
+    @Test
+    void removingMealFromOrderShouldDecreaseOrderSize() {
+
+        //given
+        Meal meal = new Meal(15, "Burger");
+        Order order = new Order();
+
+        //when
+        order.addMealToOrder(meal);
+        order.removeMealFromMeals(meal);
+
+        //then
+        assertThat(order.getMeals(), hasSize(0));
+        assertThat(order.getMeals(), not(contains(meal)));
+
+    }
+
+    @Test
+    void mealsShouldBeInCorrectOrderAfterAddingThemToOrder() {
+
+        //given
+        Meal meal1 = new Meal(10, "Pizza");
+        Meal meal2 = new Meal(15, "Burger");
+        Order order = new Order();
+
+        //when
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+
+        //then
+        assertThat(order.getMeals(), contains(meal1, meal2));
+//        assertThat(order.getMeals(), containsInAnyOrder(meal2, meal1));
+
+    }
+
+    @Test
+    void testIfToMealListAreTheSame() {
+
+        //given
+        Meal meal1 = new Meal(10, "Pizza");
+        Meal meal2 = new Meal(15, "Burger");
+        Meal meal3 = new Meal(12, "Kebab");
+
+        List<Meal> meals1 = Arrays.asList(meal1, meal2, meal3);
+        List<Meal> meals2 = Arrays.asList(meal1, meal2, meal3);
+
+        //then
+        assertThat(meals1, is(meals2));
+
+    }
 }
