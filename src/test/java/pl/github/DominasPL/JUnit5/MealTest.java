@@ -1,12 +1,15 @@
 package pl.github.DominasPL.JUnit5;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MealTest {
+
+
 
     @Test
     void shouldReturnDiscountedPrice() {
@@ -69,7 +72,6 @@ class MealTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class, () -> meal.getDiscountedPrice(10));
-
 
     }
 }

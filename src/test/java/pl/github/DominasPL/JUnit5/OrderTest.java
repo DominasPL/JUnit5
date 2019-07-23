@@ -1,6 +1,8 @@
 package pl.github.DominasPL.JUnit5;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +14,20 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
+
+    private Order order;
+
+    @BeforeEach
+    void initializeOrder() {
+//        System.out.println("This method runs before each test!");
+        order = new Order();
+    }
+
+    @AfterEach
+    void cleanUp() {
+//        System.out.println("This method runs after each test!");
+        order.cancel();
+    }
 
     @Test
     void testAssertArrayEquals() {
@@ -28,9 +44,6 @@ class OrderTest {
     @Test
     void mealListShouldBeEmptyAfterOrderCreation() {
 
-        //given
-        Order order = new Order();
-
         //then
         assertThat(order.getMeals(), empty());
         assertThat(order.getMeals().size(), equalTo(0));
@@ -43,7 +56,6 @@ class OrderTest {
         //given
         Meal meal = new Meal(15, "Burger");
         Meal meal2 = new Meal(10, "Sandwich");
-        Order order = new Order();
 
         //when
         order.addMealToOrder(meal);
@@ -62,7 +74,6 @@ class OrderTest {
 
         //given
         Meal meal = new Meal(15, "Burger");
-        Order order = new Order();
 
         //when
         order.addMealToOrder(meal);
@@ -80,7 +91,6 @@ class OrderTest {
         //given
         Meal meal1 = new Meal(10, "Pizza");
         Meal meal2 = new Meal(15, "Burger");
-        Order order = new Order();
 
         //when
         order.addMealToOrder(meal1);
