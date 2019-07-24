@@ -1,6 +1,7 @@
 package pl.github.DominasPL.JUnit5;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -115,6 +116,18 @@ class MealTest {
 
         List<String> cakeNames = Arrays.asList("AppleCake", "CheeseCake", "ChocolateCake");
         return cakeNames.stream();
+    }
+
+    @ExtendWith(IAExceptionIgnoreExtension.class)
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 5, 8})
+    void mealPricesShouldBeLowerThan10(int price) {
+
+        if (price > 5) {
+            throw new IllegalArgumentException();
+        }
+
+        assertThat(price, lessThan(20));
     }
 
 }
